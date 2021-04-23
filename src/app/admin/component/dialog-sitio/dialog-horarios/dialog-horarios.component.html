@@ -1,0 +1,147 @@
+<div mat-dialog-content>
+    <mat-grid-list cols="3" rowHeight="70px">
+
+        <!--*************************************************LUNESS****************************************-->
+        <mat-grid-tile>
+            <mat-label>Lunes&nbsp;&nbsp;</mat-label>
+            <input [ngxTimepicker]="pickerLunes" [(ngModel)]="pckLunes">
+            <ngx-material-timepicker #pickerLunes ></ngx-material-timepicker>&nbsp;&nbsp;
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioOpenL()">Agregar
+                Apertura</button>
+            <mat-label>&nbsp;&nbsp;Apertura:&nbsp;&nbsp;{{txtLunesO}}</mat-label>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioCloseL()">Agregar
+                Cierre</button>
+            <mat-label>&nbsp;&nbsp;Cierre:&nbsp;&nbsp;{{txtLunesC}}</mat-label>
+        </mat-grid-tile>
+
+        <!--*************************************************MARTES****************************************-->
+        <mat-grid-tile>
+            <mat-label>Martes&nbsp;&nbsp;</mat-label>
+            <input [ngxTimepicker]="pickerMartes" [(ngModel)]="pckMartes">
+            <ngx-material-timepicker #pickerMartes></ngx-material-timepicker>&nbsp;&nbsp;
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioOpenMa()">Agregar
+                Apertura</button>
+            <mat-label>&nbsp;&nbsp;Apertura:&nbsp;&nbsp;{{txtMartesO}}</mat-label>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioCloseMa()">Agregar
+                Cierre</button>
+            <mat-label>&nbsp;&nbsp;Cierre:&nbsp;&nbsp;{{txtMartesC}}</mat-label>
+        </mat-grid-tile>
+
+        <!--******************************************MIERCOLES****************************************-->
+        <mat-grid-tile>
+            <mat-label>Miércoles&nbsp;&nbsp;</mat-label>
+            <input [ngxTimepicker]="pickerMiercoles" [(ngModel)]="pckMiercoles">
+            <ngx-material-timepicker #pickerMiercoles></ngx-material-timepicker>&nbsp;&nbsp;
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioOpenMi()">Agregar
+                Apertura</button>
+            <mat-label>&nbsp;&nbsp;Apertura:&nbsp;&nbsp;{{txtMiercolesO}}</mat-label>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioCloseMi()">Agregar
+                Cierre</button>
+            <mat-label>&nbsp;&nbsp;Cierre:&nbsp;&nbsp;{{txtMiercolesC}}</mat-label>
+        </mat-grid-tile>
+
+        <!--******************************************JUEVES****************************************-->
+        <mat-grid-tile>
+            <mat-label>Jueves&nbsp;&nbsp;</mat-label>
+            <input [ngxTimepicker]="pickerJueves" [(ngModel)]="pckJueves">
+            <ngx-material-timepicker #pickerJueves></ngx-material-timepicker>&nbsp;&nbsp;
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioOpenJu()">Agregar
+                Apertura</button>
+            <mat-label>&nbsp;&nbsp;Apertura:&nbsp;&nbsp;{{txtJuevesO}}</mat-label>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioCloseJu()">Agregar
+                Cierre</button>
+            <mat-label>&nbsp;&nbsp;Cierre:&nbsp;&nbsp;{{txtJuevesC}}</mat-label>
+        </mat-grid-tile>
+
+        <!--******************************************VIERNES****************************************-->
+        <mat-grid-tile>
+            <mat-label>Viernes&nbsp;&nbsp;</mat-label>
+            <input [ngxTimepicker]="pickerViernes" [(ngModel)]="pckViernes"> 
+            <ngx-material-timepicker #pickerViernes></ngx-material-timepicker>&nbsp;&nbsp;
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioOpenVi()">Agregar
+                Apertura</button>
+            <mat-label>&nbsp;&nbsp;Apertura:&nbsp;&nbsp;{{txtViernesO}}</mat-label>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioCloseVi()">Agregar
+                Cierre</button>
+            <mat-label>&nbsp;&nbsp;Cierre:&nbsp;&nbsp;{{txtViernesC}}</mat-label>
+        </mat-grid-tile>
+
+        <!--******************************************SABADO****************************************-->
+        <mat-grid-tile>
+            <mat-label>Sábado&nbsp;&nbsp;</mat-label>
+            <input [ngxTimepicker]="pickerSabado" [(ngModel)]="pckSabado">
+            <ngx-material-timepicker #pickerSabado></ngx-material-timepicker>&nbsp;&nbsp;
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioOpenSa()">Agregar
+                Apertura</button>
+            <mat-label>&nbsp;&nbsp;Apertura:&nbsp;&nbsp;{{txtSabadoO}}</mat-label>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioCloseSa()">Agregar
+                Cierre</button>
+            <mat-label>&nbsp;&nbsp;Cierre:&nbsp;&nbsp;{{txtSabadoC}}</mat-label>
+        </mat-grid-tile>
+
+        <!--******************************************DOMINGO****************************************-->
+        <mat-grid-tile>
+            <mat-label>Domingo&nbsp;&nbsp;</mat-label>
+            <input [ngxTimepicker]="pickerDomingo" [(ngModel)]="pckDomingo">
+            <ngx-material-timepicker #pickerDomingo></ngx-material-timepicker>&nbsp;&nbsp;
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioOpenDo()">Agregar
+                Apertura</button>
+            <mat-label>&nbsp;&nbsp;Apertura:&nbsp;&nbsp;{{txtDomingoO}}</mat-label>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarHorarioCloseDo()">Agregar
+                Cierre</button>
+            <mat-label>&nbsp;&nbsp;Cierre:&nbsp;&nbsp;{{txtDomingoC}}</mat-label>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</div>
+
+<h2></h2>
+<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
+        <button class="btnCancel" mat-raised-button color="primary">Cancelar</button>
+        <button class="btnSave" id="btnActu" *ngIf="data" mat-raised-button color="primary"
+            (click)="save()">Guardar</button>
+    </mat-grid-tile>
+</mat-grid-list>

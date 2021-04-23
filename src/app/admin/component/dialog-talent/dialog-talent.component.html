@@ -1,0 +1,286 @@
+<h2>{{texto}}</h2>
+
+<div mat-dialog-content>
+    <mat-tab-group mat-align-tabs="center">
+
+        <mat-tab label="Datos del Talento">
+            <mat-grid-list cols="4" rowHeight="110px">
+                <mat-grid-tile>
+                    <!-- nombreTalent -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>NombreTalent&nbsp;</mat-label><br>
+                        <input id="noNullT" matInput placeholder="" *ngIf="data" [(ngModel)]="data.NombreTalent" ngModel
+                            required>
+                        <input id="nullT" matInput *ngIf="data == null" noNullT.matDialogClose
+                            [(ngModel)]="nombreTalent" ngModel required>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- video -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Vídeo&nbsp;</mat-label><br>
+                        <input id="noNullH" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Video"
+                            placeholder="URL de YouTube">
+                        <input id="nullNH" matInput *ngIf="data == null" noNullH.matDialogClose [(ngModel)]="video"
+                            placeholder="URL de YouTube">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- licencia -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Licencia&nbsp;</mat-label><br>
+                        <input id="noNullL" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Licencia">
+                        <input id="nullL" matInput *ngIf="data == null" noNullL.matDialogClose [(ngModel)]="licencia">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile>
+                    <!--categoria-->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Categoría&nbsp;</mat-label><br>
+                        <mat-select [(value)]="selectedCat" required>
+                            <mat-option value="{{dato._id}}" *ngFor="let dato of datosCategoria">
+                                {{dato.nombreCategoria}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!--usuario-->
+                    <!--**************************************ES nombreUsuario?********************************CHECAR MODEL DE USUARIO*******************-->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Usuario&nbsp;</mat-label><br>
+                        <mat-select [(value)]="selectedUsu" required>
+                            <mat-option value="{{dato.uid}}" *ngFor="let dato of datosUsuario">{{dato.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!--municipio-->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Municipio&nbsp;</mat-label><br>
+                        <mat-select [(value)]="selectedMun" required>
+                            <mat-option value="{{dato._id}}" *ngFor="let dato of datosMunicipio">
+                                {{dato.nombreMunicipio}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- status -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Status&nbsp;</mat-label><br>
+                        <mat-select [(value)]="selectedSTA" required>
+                            <mat-option [value]="true">TRUE</mat-option>
+                            <mat-option [value]="false">FALSE</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile *ngIf="btnAddUbicacion">
+                    <!-- servicios -->
+                    <button class="btnSave" mat-raised-button color="primary"
+                        (click)="openDialogAsignarUbicacion()">Agregar
+                        Ubicación</button>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+        </mat-tab>
+
+
+        <mat-tab label="Contactos">
+            <mat-grid-list cols="3" rowHeight="110px">
+                <mat-grid-tile>
+                    <!-- nombreContacto1 -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Nombre Contacto 1&nbsp;</mat-label><br>
+                        <input id="noNullNC1" matInput placeholder="" *ngIf="data" [(ngModel)]="data.NombreContacto1"
+                            required>
+                        <input id="nullNC1" matInput *ngIf="data == null" noNullNC1.matDialogClose
+                            [(ngModel)]="nombreContacto1" required>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- telContacto1 -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Tel Contacto 1&nbsp;</mat-label><br>
+                        <input id="noNullTC1" matInput placeholder="" *ngIf="data" [(ngModel)]="data.TelContacto1"
+                            required>
+                        <input id="nullTC1" matInput *ngIf="data == null" noNullTC1.matDialogClose
+                            [(ngModel)]="telContacto1" required>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- correoContacto1 -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Correo Contacto 1&nbsp;</mat-label><br>
+                        <input id="noNullCC1" matInput placeholder="" *ngIf="data" [(ngModel)]="data.CorreoContacto1">
+                        <input id="nullCC1" matInput *ngIf="data == null" noNullCC1.matDialogClose
+                            [(ngModel)]="correoContacto1">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- nombreContacto2 -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Nombre Contacto 2&nbsp;</mat-label><br>
+                        <input id="noNullNC2" matInput placeholder="" *ngIf="data" [(ngModel)]="data.NombreContacto2">
+                        <input id="nullNC2" matInput *ngIf="data == null" noNullNC2.matDialogClose
+                            [(ngModel)]="nombreContacto2">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- telContacto2 -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Tel Contacto 2&nbsp;</mat-label><br>
+                        <input id="noNullTC2" matInput placeholder="" *ngIf="data" [(ngModel)]="data.TelContacto2">
+                        <input id="nullTC2" matInput *ngIf="data == null" noNullTC2.matDialogClose
+                            [(ngModel)]="telContacto2">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- correoContacto2 -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Correo Contacto 2&nbsp;</mat-label><br>
+                        <input id="noNullCC2" matInput placeholder="" *ngIf="data" [(ngModel)]="data.CorreoContacto2">
+                        <input id="nullCC2" matInput *ngIf="data == null" noNullCC2.matDialogClose
+                            [(ngModel)]="correoContacto2">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
+
+
+        <mat-tab label="Redes Sociales">
+            <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile>
+                    <!-- Faceebook -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Facebook&nbsp;</mat-label><br>
+                        <input id="noNullF" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Facebook">
+                        <input id="nullF" matInput *ngIf="data == null" noNullF.matDialogClose [(ngModel)]="facebook">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- Instagram -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Instagram&nbsp;</mat-label><br>
+                        <input id="noNullIN" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Instagram">
+                        <input id="nullIN" matInput *ngIf="data == null" noNullIN.matDialogClose
+                            [(ngModel)]="instagram">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- Sitio Web -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Sitio Web&nbsp;</mat-label><br>
+                        <input id="noNullSI" matInput placeholder="" *ngIf="data" [(ngModel)]="data.SitioWeb">
+                        <input id="nullSI" matInput *ngIf="data == null" noNullSI.matDialogClose [(ngModel)]="sitioWeb">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
+
+    </mat-tab-group>
+</div>
+
+<mat-grid-list cols="1" rowHeight="120px">
+    <mat-grid-tile>
+        <!-- imgPrincipal -->
+        <mat-form-field class="example-full-width">
+            <label>ImgPrincipal &nbsp;</label><br><br>
+            <input style="display: none" type="file" (change)="onFileChangedPrincipal($event)" #fileInput>
+            <button class="btnSave" mat-raised-button color="primary"
+                (click)="fileInput.click()">{{txtFilePri}}</button>&nbsp;&nbsp;
+            <button class="btnSave" *ngIf="btnUpload" mat-raised-button color="primary" (click)="onUploadPrincipal()">
+                Upload
+            </button>&nbsp;&nbsp;<label>{{txtAccionPri}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <label id="noNullI" *ngIf="data">{{data.ImagenPri}}</label>
+            <input id="noNullI" matInput placeholder="" *ngIf="data" disabled="true">
+            <input id="nullI" matInput *ngIf="data == null" noNullI.matDialogClose disabled="true">
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- ELIMINAR IMAGENES DEL ARRAY
+
+    <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+            <mat-label>Imagenes</mat-label><br>
+            <mat-select [(value)]="selectedImgs" [(ngModel)]="opcionImgsElim">
+                <mat-option *ngFor="let dato of prueba" value="{{dato}}">{{dato}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="btnCancel" mat-raised-button color="warn" (click)="eliminarImagen()">Eliminar</button>
+    </mat-grid-tile> -->
+
+</mat-grid-list>
+
+
+<mat-grid-list *ngIf="crdImg" cols="1" rowHeight="300px">
+    <mat-grid-tile>
+        <mat-card class="example-card" *ngFor="let dato of prueba">
+
+            <mat-card-content>
+                <div align="center">
+                    <img src="{{dato}}" width="200px" height="200px">
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <div align="center">
+                    <button class="btnCancel" color="warn" mat-raised-button (click)="eliminarImagen()"><span class="
+                    material-icons">
+                            delete
+                        </span>&nbsp;&nbsp;Borrar</button>
+                </div>
+                <!--<button mat-button>SHARE</button>-->
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+
+<mat-grid-list cols="1" rowHeight="300px">
+    <mat-label>Descripción</mat-label>
+    <mat-grid-tile>
+        <angular-editor [placeholder]="'Descripción...'" *ngIf="data" [config]="editorConfig"
+            [(ngModel)]="data.Descripcion">
+        </angular-editor>
+        <angular-editor [placeholder]="'Descripción...'" *ngIf="data == null" [config]="editorConfig"
+            [(ngModel)]="descripcion">
+        </angular-editor>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+<h2></h2>
+
+<!-- ACTIONS -->
+<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
+        <mat-dialog-actions>
+            <div align="start">
+                <button class="btnCancel" mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div align="end">
+                <button class="btnSave" id="btnActu" *ngIf="tempImg" mat-raised-button color="primary"
+                    (click)="save()">{{btnTexto}}</button><button class="btnSave" *ngIf="tempImgCreate"
+                    mat-raised-button color="primary" (click)="create()" btnActu.matDialogClose>{{btnTexto}}</button>
+            </div>
+        </mat-dialog-actions>
+    </mat-grid-tile>
+</mat-grid-list>

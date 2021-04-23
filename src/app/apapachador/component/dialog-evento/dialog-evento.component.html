@@ -1,0 +1,149 @@
+<h2>{{texto}}</h2>
+
+<div mat-dialog-content>
+    <mat-grid-list cols="2" rowHeight="100px">
+
+        <mat-grid-tile>
+            <!-- nombreEvento -->
+            <mat-form-field class="example-full-width">
+                <mat-label>Nombre Evento&nbsp;</mat-label><br>
+                <input id="noNull" matInput placeholder="" *ngIf="data" [(ngModel)]="data.NombreEvento"
+                    placeholder="Ej. Abc">
+                <input id="nullN" matInput *ngIf="data == null" noNull.matDialogClose [(ngModel)]="nombreEvento"
+                    placeholder="Ej. Abc">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <!-- descripcion 
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Descripción&nbsp;</mat-label><br>
+                <input id="noNullD" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Descripcion"
+                    placeholder="Ej. Abc">
+                <input id="nullND" matInput *ngIf="data == null" noNullD.matDialogClose [(ngModel)]="descripcion"
+                    placeholder="Ej. Abc">
+            </mat-form-field>
+        </mat-grid-tile>
+-->
+
+        <mat-grid-tile>
+            <!-- horario -->
+            <mat-form-field class="example-full-width">
+                <mat-label>Horario&nbsp;</mat-label><br>
+                <input id="noNullH" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Horario"
+                    placeholder="Ej. Abc">
+                <input id="nullH" matInput *ngIf="data == null" noNullH.matDialogClose [(ngModel)]="horario"
+                    placeholder="Ej. Abc">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-radio-group>
+            <mat-grid-tile>
+                <!--sitio-->
+                <mat-radio-button *ngIf="rbtnSitio" value="sitio" (click)="validarSIT()">Sitio</mat-radio-button>
+                <br>
+                <mat-form-field *ngIf="selSitio" appearance="fill">
+                    <mat-label>Selecciona un Sitio&nbsp;</mat-label>
+                    <mat-select [(value)]="selectedSit">
+                        <mat-option value="{{dato._id}}" *ngFor="let dato of datosSitio">{{dato.nombreSitio}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <!--talent-->
+                <mat-radio-button *ngIf="rbtnTalento" value="talento" (click)="validarTAL()">Talento</mat-radio-button>
+                <br>
+                <mat-form-field *ngIf="selTalent" appearance="fill">
+                    <mat-label>Selecciona un Talento&nbsp;</mat-label>
+                    <mat-select [(value)]="selectedTal">
+                        <mat-option value="{{dato._id}}" *ngFor="let dato of datosTalent">{{dato.nombreTalent}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-radio-group>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <!-- status -->
+                <mat-label>Status&nbsp;</mat-label><br>
+                <mat-select [(value)]="selectedSTA">
+                    <mat-option [value]="true">TRUE</mat-option>
+                    <mat-option [value]="false">FALSE</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile *ngIf="btnAddUbicacion">
+            <!-- servicios -->
+            <button class="btnSave" mat-raised-button color="primary" (click)="openDialogAsignarUbicacion()">Agregar
+                Ubicación</button>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</div>
+
+<mat-grid-list cols="1" rowHeight="120px">
+    <mat-grid-tile>
+        <!-- imgPrincipal -->
+        <mat-form-field class="example-full-width">
+            <label>ImgPrincipal &nbsp;</label><br><br>
+            <input style="display: none" type="file" (change)="onFileChangedPrincipal($event)" #fileInput>
+            <button class="btnSave" mat-raised-button color="primary"
+                (click)="fileInput.click()">{{txtFilePri}}</button>
+            &nbsp;&nbsp;
+            <button class="btnSave" *ngIf="btnUpload" mat-raised-button color="primary" (click)="onUploadPrincipal()">
+                Upload
+            </button>
+            <mat-label>{{txtAccionPri}}</mat-label>
+            <mat-label id="noNullI" *ngIf="data">{{data.ImagenPri}}</mat-label>
+            <input id="noNullI" matInput placeholder="" *ngIf="data" disabled="true">
+            <input id="nullI" matInput *ngIf="data == null" noNullI.matDialogClose disabled="true">
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- ELIMINAR IMAGENES DEL ARRAY -->
+
+    <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+            <mat-label>Imagenes</mat-label><br>
+            <mat-select [(value)]="selectedImgs" [(ngModel)]="opcionImgsElim">
+                <mat-option *ngFor="let dato of prueba" value="{{dato}}">{{dato}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="btnCancel" mat-raised-button color="warn" (click)="eliminarImagen()">Eliminar</button>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
+<mat-grid-list cols="1" rowHeight="300px">
+    <mat-label>Descripción</mat-label>
+    <mat-grid-tile>
+        <angular-editor [placeholder]="'Descripción...'" *ngIf="data" [config]="editorConfig"
+            [(ngModel)]="data.Descripcion">
+        </angular-editor>
+        <angular-editor [placeholder]="'Descripción...'" *ngIf="data == null" [config]="editorConfig"
+            [(ngModel)]="descripcion">
+        </angular-editor>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+<h2></h2>
+
+<!-- ACTIONS -->
+<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
+        <mat-dialog-actions>
+            <div align="start">
+                <button class="btnCancel" mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div align="end">
+                <button class="btnSave" id="btnActu" *ngIf="tempImg" mat-raised-button color="primary"
+                    (click)="save()">{{btnTexto}}</button><button class="btnSave" *ngIf="tempImgCreate"
+                    mat-raised-button color="primary" (click)="create()" btnActu.matDialogClose>{{btnTexto}}</button>
+            </div>
+        </mat-dialog-actions>
+    </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Servicios</h2><br>
+
+<div mat-dialog-content>
+
+    <mat-grid-list cols="3" rowHeight="100px">
+
+        <mat-grid-tile>
+            <!--estado-->
+            <mat-form-field class="example-full-width">
+                <mat-label>Servicios Disponibles</mat-label><br>
+                <select matNativeControl [(ngModel)]="opcionServicio" [(value)]="selectedSer"
+                    (change)="obtenerServicio()">
+                    <option value="{{dato._id}}" *ngFor="let dato of datosServicio" selected>
+                        {{dato.nombreServicio}}</option>
+                </select>
+            </mat-form-field>
+            <button class="btnSave" mat-raised-button color="warn" (click)="agregarServicio()">Agregar</button>
+            <br>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-label>{{txtAccion}}</mat-label>
+        </mat-grid-tile>
+        <mat-grid-tile>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Servicios Asignados</mat-label><br>
+                <mat-select  [(value)]="selected" [(ngModel)]="opcionServicioElim">
+                    <mat-option *ngFor="let dato of prueba" value="{{dato._id}}" >{{dato.nombreServicio}}</mat-option>
+                    
+                </mat-select>
+            </mat-form-field>
+            <button class="btnCancel" mat-raised-button color="warn" (click)="eliminarServicio()">Eliminar</button>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</div>
+<h2></h2>
+<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
+        <br><br>
+        <button class="btnSave" id="btnActu" *ngIf="data" mat-raised-button color="primary"
+            (click)="save()">Guardar</button>
+        <br><br>
+    </mat-grid-tile>
+</mat-grid-list>

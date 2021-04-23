@@ -1,0 +1,78 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push">
+        <mat-toolbar color="accent">
+            <span>Menú</span>
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </mat-toolbar>
+        <mat-nav-list>
+            <a routerLink="./index" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>home</mat-icon>
+                <span>Home</span>
+            </a>
+            <a routerLink="./usuarios" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>people</mat-icon>
+                <span>Usuarios</span>
+            </a>
+            <a routerLink="./paises" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>add_location</mat-icon>
+                <span>Paises</span>
+            </a>
+            <a routerLink="./estados" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>add_location</mat-icon>
+                <span>Estados</span>
+            </a>
+            <a routerLink="./categorias" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>category</mat-icon>
+                <span>Categorias</span>
+            </a>
+            <a routerLink="./servicios" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>handyman</mat-icon>
+                <span>Servicios</span>
+            </a>
+            <a routerLink="./municipios" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>museum</mat-icon>
+                <span>Municipios</span>
+            </a>
+            <a routerLink="./sitios" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>home_work</mat-icon>
+                <span>Sitios</span>
+            </a>
+            <a routerLink="./talentos" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>contacts</mat-icon>
+                <span>Talentos</span>
+            </a>
+            <a routerLink="./productos" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>dashboard</mat-icon>
+                <span>Productos</span>
+            </a>
+            <a routerLink="./eventos" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>event_available</mat-icon>
+                <span>Eventos</span>
+            </a>
+            <a routerLink="./talleres" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>build</mat-icon>
+                <span>Talleres</span>
+            </a>
+
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-toolbar>
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span class="spacer"></span>
+        <button mat-button (click)="logout()">
+            Logout
+        </button>
+    </mat-toolbar>
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+
+
+</mat-sidenav-container>

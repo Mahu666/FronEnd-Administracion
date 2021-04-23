@@ -1,0 +1,59 @@
+<div fxLayout="row  wrap" fxLayoutAlign="center" fxLayout.sm="colum" fxLayout.xs="colum">
+    <div fxFlex="100" fxFlex.lg="40" fxFlex.sm="100" fxFlex.xs="100" fxFlex.md="100">
+        <mat-card class="principal">
+            <mat-card-header>
+
+                <mat-card-title>Mi perfil de usuario</mat-card-title>
+            </mat-card-header>
+
+            <form autocomplete="off" [formGroup]="perfilForm" (ngSubmit)="update()">
+                <mat-card-content>
+                    <mat-form-field>
+                        <mat-label>Favorite food</mat-label>
+                        <input matInput placeholder="Nombre completo" value="Sushi" formControlName="nombre">
+                    </mat-form-field>
+                    <br>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button type="submit" fxFlex="100" mat-raised-button color="primary">
+                        <mat-icon>save</mat-icon> Guardar cambios
+                    </button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.lg="40" fxFlex.sm="100" fxFlex.xs="100" fxFlex.md="100">
+
+        <mat-card class="principal">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Imagen de Perfil</mat-card-title>
+            </mat-card-header>
+
+
+
+
+            <mat-card-content>
+
+                <div class="text-center">
+                    <img *ngIf="usuario.img" mat-card-image [src]="usuario.img" class="img-avatar">
+                    <img *ngIf="!usuario.img" mat-card-image src="./../../../../assets/publicas/no-image.png" class="img-avatar">
+                </div>
+
+                <br><br>
+
+
+                <br>
+                <br>
+
+            </mat-card-content>
+            <mat-card-actions>
+                <button type="submit" fxFlex="100" mat-raised-button color="primary" [disabled]="!imagenSubir" (click)="subirImagen()">
+                    <mat-icon>save</mat-icon> Guardar Imagen
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+</div>

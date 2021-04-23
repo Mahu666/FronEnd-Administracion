@@ -1,0 +1,53 @@
+table {
+  width: 100%;
+}
+
+td {
+  margin: auto;
+  border: white;
+}
+
+th {
+font-size: large;
+color: white;
+font-style: initial;
+text-align: center; 
+border-left:2px solid white;
+border-right:2px solid white;
+border-top:3px solid white;
+border-bottom:2px solid white;
+background-color: #701332;
+text-align-last: center;
+}
+
+td {
+font-size: medium;
+font-style: initial;
+background-color: white;
+text-align: center; 
+color: gray;
+border-left:1px solid white;
+border-right:1px solid white;
+border-top:1px solid white;
+border-bottom:1px solid white;
+}
+
+button.btnAdd {
+background-color: #e196af;
+}
+
+button.btnUpdate{
+background-color: #e196af;
+}
+
+button.btnDelete{
+background-color: #701332;
+}
+
+button.btnBack {
+background-color: #e196af;
+}
+
+button.btnNext {
+background-color: #e196af;
+}

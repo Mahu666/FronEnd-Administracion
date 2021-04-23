@@ -1,0 +1,86 @@
+mat-dialog-content{
+    width: auto;    
+}
+h2{
+    font-size: x-large;            
+    text-align-last: center;
+    border-bottom:2px solid #BB5E7D;            
+
+}
+
+label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+mat-label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+input{
+    font-size: medium;
+    min-width: auto;
+    max-width: auto;
+    width: auto;
+    color: gray;    
+}
+
+div.divHeader {
+    font-size: x-large;       
+    border: #480019;
+    height: auto;
+    width: auto;
+    background-color: #e196af;
+}
+
+.example-form {
+    min-width: auto;
+    max-width: auto;
+    width: auto;    
+  }
+  
+  .example-full-width {
+    width: 70%;
+  }
+
+  button.btnCancel {
+    background-color: gray;  
+    
+    width: 150px;
+    }
+
+  button.btnSave {
+background-color: #BB5E7D;
+
+width: 150px;
+  }
+
+  ::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+    background-color: #e196af !important;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: gray !important;
+  }
+
+  ::ng-deep input.mat-input-element {
+    color: gray;
+  }
+
+  .mat-tab-group {
+    margin-bottom: 10px;
+    font-size: medium;
+  }
+  
+    /* Styles for the ink bar */
+/* active tab */
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  color:white;
+  background-color: #e196af;
+  }
+
+  /* ink bar */
+::ng-deep .mat-ink-bar {
+  background-color: var(--primary-color,#BB5E7D) !important;
+  }

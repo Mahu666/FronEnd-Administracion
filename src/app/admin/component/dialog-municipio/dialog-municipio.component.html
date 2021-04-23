@@ -1,0 +1,377 @@
+<h2>{{texto}}</h2>
+
+<div mat-dialog-content>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Datos del Municipio">
+            <mat-grid-list cols="3" rowHeight="110px">
+                <mat-grid-tile>
+                    <!-- nombreMunicipio -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Municipio&nbsp;</mat-label><br>
+                        <input id="noNull" matInput placeholder="" *ngIf="data" [(ngModel)]="data.NombreMunicipio"
+                            required>
+                        <input id="nullN" matInput *ngIf="data == null" noNull.matDialogClose
+                            [(ngModel)]="nombreMunicipio" required>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- imgPrincipal -->
+                    <mat-form-field class="example-full-width">
+                        <input style="display: none" type="file" (change)="onFileChangedPrincipal($event)" #fileInput
+                            required>
+                        <button class="btnCancel" mat-raised-button color="warn"
+                            (click)="fileInput.click()">{{txtFilePri}}</button><br><br>
+                        <button class="btnSave" *ngIf="btnImgPrincipal" mat-raised-button color="primary"
+                            (click)="onUploadPrincipal()"> Upload
+                        </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>{{txtAccionPri}}</label>
+                        <br>
+                        <!--<label id="noNullI" *ngIf="data">{{data.ImagenPri}}</label>
+                        <input id="noNullI" matInput placeholder="" *ngIf="data" value="{{data.ImgPrincipal}}"
+                            [(ngModel)]="data.ImgPrincipal" disabled="true">
+                        <input id="nullI" matInput *ngIf="data == null" noNullI.matDialogClose [(ngModel)]="munI"
+                            disabled="true">-->
+
+                        <input [hidden]="true" id="noNullI" matInput placeholder="" *ngIf="data" disabled="true">
+                        <input [hidden]="true" id="nullI" matInput *ngIf="data == null" noNullI.matDialogClose
+                            disabled="true">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <!-- ELIMINAR IMAGENES DEL ARRAY 
+
+                <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Imagenes Principal</mat-label><br>
+                        <mat-select [(value)]="selectedImgsP" [(ngModel)]="opcionImgsElimP">
+                            <mat-option *ngFor="let dato of pruebaP" value="{{dato}}">{{dato}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>&nbsp;&nbsp;
+                    <button class="btnCancel" mat-raised-button color="warn"
+                        (click)="eliminarImagenP()">Eliminar</button>
+                </mat-grid-tile>-->
+
+                <mat-grid-tile>
+                    <!-- clima -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Clima&nbsp;</mat-label><br>
+                        <input id="noNullCL" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Clima">
+                        <input id="nullCL" matInput *ngIf="data == null" noNullCL.matDialogClose [(ngModel)]="clima">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- status -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Status&nbsp;</mat-label><br>
+                        <mat-select [(value)]="selectedSTA" required>
+                            <mat-option [value]="true">TRUE</mat-option>
+                            <mat-option [value]="false">FALSE</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!--estado-->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Estado&nbsp;</mat-label><br>
+                        <mat-select [(value)]="selected" required>
+                            <mat-option value="{{dato._id}}" *ngFor="let dato of datosEstado">{{dato.nombreEstado}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile *ngIf="btnAddUbicacion">
+                    <!-- servicios -->
+                    <button class="btnSave" mat-raised-button color="primary"
+                        (click)="openDialogAsignarUbicacion()">Agregar
+                        Ubicación</button>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list *ngIf="crdImgP" cols="1" rowHeight="300px">
+                <mat-grid-tile>
+                    <mat-card class="example-card" *ngFor="let dato of pruebaP">
+
+                        <mat-card-content>
+                            <div align="center">
+                                <img src="{{dato}}" width="200px" height="200px">
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <div align="center">
+                                <button class="btnCancel" color="warn" mat-raised-button
+                                    (click)="eliminarImagenP()"><span class="
+                                material-icons">
+                                        delete
+                                    </span>&nbsp;&nbsp;Borrar</button>
+                            </div>
+                            <!--<button mat-button>SHARE</button>-->
+                        </mat-card-actions>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+        </mat-tab>
+
+        <mat-tab label="Datos Históricos">
+            <mat-grid-list cols="3" rowHeight="130px">
+                <mat-grid-tile>
+                    <!-- historia -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Historia&nbsp;</mat-label><br>
+                        <input id="noNullH" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Historia">
+                        <input id="nullNH" matInput *ngIf="data == null" noNullH.matDialogClose [(ngModel)]="historia">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- imgHistoria -->
+                    <mat-form-field class="example-full-width">
+                        <input style="display: none" type="file" (change)="onFileChangedHistoria($event)" #fileInputH>
+                        <button class="btnCancel" mat-raised-button color="warn"
+                            (click)="fileInputH.click()">{{txtFileHis}}</button><br><br>
+                        <button class="btnSave" *ngIf="btnImgHistoria" mat-raised-button color="primary"
+                            (click)="onUploadHistoria()">Upload</button><label>{{txtAccionHis}}</label>
+                        <br>
+                        <!--<label id="noNullIH" *ngIf="data">{{data.ImagenH}}</label>-->
+
+                        <input [hidden]="true" id="noNullIH" matInput placeholder="" *ngIf="data" disabled="true">
+                        <input [hidden]="true" id="nullIH" matInput *ngIf="data == null" noNullIH.matDialogClose
+                            disabled="true">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <!-- ELIMINAR IMAGENES DEL ARRAY 
+
+                <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Imagenes Historia</mat-label><br>
+                        <mat-select [(value)]="selectedImgsH" [(ngModel)]="opcionImgsElimH">
+                            <mat-option *ngFor="let dato of pruebaH" value="{{dato}}">{{dato}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button class="btnCancel" mat-raised-button color="warn"
+                        (click)="eliminarImagenH()">Eliminar</button>
+                </mat-grid-tile>-->
+
+                <mat-grid-tile>
+                    <!-- videoHistoria -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Vídeo Historia&nbsp;</mat-label><br>
+                        <input id="noNullVH" matInput placeholder="" *ngIf="data" [(ngModel)]="data.VideoHistoria"
+                            placeholder="URL de YouTube">
+                        <input id="nullVH" matInput *ngIf="data == null" noNullVH.matDialogClose
+                            [(ngModel)]="videoHistoria" placeholder="URL de YouTube">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+
+
+            <mat-grid-list *ngIf="crdImgP" cols="1" rowHeight="300px">
+                <mat-grid-tile>
+                    <mat-card class="example-card" *ngFor="let dato of pruebaH">
+
+                        <mat-card-content>
+                            <div align="center">
+                                <img src="{{dato}}" width="200px" height="200px">
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <div align="center">
+                                <button class="btnCancel" color="warn" mat-raised-button
+                                    (click)="eliminarImagenH()"><span class="
+                                material-icons">
+                                        delete
+                                    </span>&nbsp;&nbsp;Borrar</button>
+                            </div>
+                            <!--<button mat-button>SHARE</button>-->
+                        </mat-card-actions>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+        </mat-tab>
+
+        <mat-tab label="Datos Culturales">
+            <mat-grid-list cols="3" rowHeight="130px">
+                <mat-grid-tile>
+                    <!-- cultura -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Cultura&nbsp;</mat-label><br>
+                        <input id="noNullC" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Cultura">
+                        <input id="nullC" matInput *ngIf="data == null" noNullC.matDialogClose [(ngModel)]="cultura">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- imgCultura *ngIf="data._id !== null" -->
+                    <mat-form-field class="example-full-width">
+                        <input style="display: none" type="file" (change)="onFileChangedCultura($event)" #fileInputC>
+                        <button class="btnCancel" mat-raised-button color="warn"
+                            (click)="fileInputC.click()">{{txtFileCul}}</button><br><br>
+                        <button class="btnSave" *ngIf="btnImgCultura" mat-raised-button color="primary"
+                            (click)="onUploadCultura()">Upload</button><label>{{txtAccionCul}}</label>
+                        <br>
+                        <label [hidden]="true" id="noNullIC" *ngIf="data">{{data.ImagenC}}</label>
+                        <input [hidden]="true" id="noNullIC" matInput placeholder="" *ngIf="data" disabled="true">
+                        <input [hidden]="true" id="nullIC" matInput *ngIf="data == null" noNullIC.matDialogClose
+                            disabled="true">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <!-- ELIMINAR IMAGENES DEL ARRAY 
+
+                <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Imagenes Cultura</mat-label><br>
+                        <mat-select [(value)]="selectedImgsC" [(ngModel)]="opcionImgsElimC">
+                            <mat-option *ngFor="let dato of pruebaC" value="{{dato}}">{{dato}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button class="btnCancel" mat-raised-button color="warn"
+                        (click)="eliminarImagenC()">Eliminar</button>
+                </mat-grid-tile> -->
+
+
+                <mat-grid-tile>
+                    <!-- videoCultura -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Vídeo Cultura&nbsp;</mat-label><br>
+                        <input id="noNullVC" matInput placeholder="" *ngIf="data" [(ngModel)]="data.VideoCultura"
+                            placeholder="URL de YouTube">
+                        <input id="nullVC" matInput *ngIf="data == null" noNullVC.matDialogClose
+                            [(ngModel)]="videoCultura" placeholder="URL de YouTube">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+
+            
+            <mat-grid-list *ngIf="crdImgP" cols="1" rowHeight="300px" >
+                <mat-grid-tile>
+                    <mat-card class="example-card" *ngFor="let dato of pruebaC">
+
+                        <mat-card-content>
+                            <div align="center">
+                                <img src="{{dato}}" width="200px" height="200px">
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <div align="center">
+                                <button class="btnCancel" color="warn" mat-raised-button
+                                    (click)="eliminarImagenC()"><span class="
+                                material-icons">
+                                        delete
+                                    </span>&nbsp;&nbsp;Borrar</button>
+                            </div>
+                            <!--<button mat-button>SHARE</button>-->
+                        </mat-card-actions>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+        </mat-tab>
+
+        <mat-tab label="Datos Tradicionales">
+            <mat-grid-list cols="3" rowHeight="130px">
+                <mat-grid-tile>
+                    <!-- tradiciones -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Tradiciones&nbsp;</mat-label><br>
+                        <input id="noNullT" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Tradiciones">
+                        <input id="nullT" matInput *ngIf="data == null" noNullT.matDialogClose
+                            [(ngModel)]="tradiciones">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <!-- imgTradiciones -->
+                    <mat-form-field class="example-full-width">
+                        <input style="display: none" type="file" (change)="onFileChangedTradiciones($event)"
+                            #fileInputT>
+                        <button class="btnCancel" mat-raised-button color="warn"
+                            (click)="fileInputT.click()">{{txtFileTra}}</button><br><br>
+                        <button class="btnSave" *ngIf="btnImgTradicion" mat-raised-button color="primary"
+                            (click)="onUploadTradiciones()">Upload</button><label>{{txtAccionTra}}</label>
+                        <br>
+                        <label [hidden]="true" id="noNullIT" *ngIf="data">{{data.ImagenT}}</label>
+                        <input [hidden]="true" id="noNullIT" matInput placeholder="" *ngIf="data" disabled="true">
+                        <input [hidden]="true" id="nullIT" matInput *ngIf="data == null" noNullIT.matDialogClose
+                            disabled="true">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <!-- ELIMINAR IMAGENES DEL ARRAY 
+
+                <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Imagenes Tradiciones</mat-label><br>
+                        <mat-select [(value)]="selectedImgsT" [(ngModel)]="opcionImgsElimT">
+                            <mat-option *ngFor="let dato of pruebaT" value="{{dato}}">{{dato}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button class="btnCancel" mat-raised-button color="warn"
+                        (click)="eliminarImagenT()">Eliminar</button>
+                </mat-grid-tile> -->
+
+                <mat-grid-tile>
+                    <!-- videoTradiciones -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Vídeo Tradiciones&nbsp;</mat-label><br>
+                        <input id="noNullVT" matInput placeholder="" *ngIf="data" [(ngModel)]="data.VideoTradiciones"
+                            placeholder="URL de YouTube">
+                        <input id="nullVT" matInput *ngIf="data == null" noNullVT.matDialogClose
+                            [(ngModel)]="videoTradiciones" placeholder="URL de YouTube">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+
+            <mat-grid-list *ngIf="crdImgP" cols="1" rowHeight="300px">
+                <mat-grid-tile>
+                    <mat-card class="example-card" *ngFor="let dato of pruebaT">
+
+                        <mat-card-content>
+                            <div align="center">
+                                <img src="{{dato}}" width="200px" height="200px">
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <div align="center">
+                                <button class="btnCancel" color="warn" mat-raised-button
+                                    (click)="eliminarImagenT()"><span class="
+                                material-icons">
+                                        delete
+                                    </span>&nbsp;&nbsp;Borrar</button>
+                            </div>
+                            <!--<button mat-button>SHARE</button>-->
+                        </mat-card-actions>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+        </mat-tab>
+
+    </mat-tab-group>
+
+</div>
+<h2></h2>
+<!-- ACTIONS -->
+<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
+        <mat-dialog-actions>
+            <div align="start">
+                <button class="btnCancel" mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div align="end">
+                <button class="btnSave" id="btnActu" *ngIf="tempImg" mat-raised-button color="primary"
+                    (click)="save()">{{btnTexto}}</button><button class="btnSave" *ngIf="tempImgCreate"
+                    mat-raised-button color="primary" (click)="create()" btnActu.matDialogClose>{{btnTexto}}</button>
+            </div>
+        </mat-dialog-actions>
+    </mat-grid-tile>
+</mat-grid-list>

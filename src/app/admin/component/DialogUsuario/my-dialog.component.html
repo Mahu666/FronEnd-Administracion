@@ -1,0 +1,116 @@
+<h2>{{texto}}</h2>
+<div mat-dialog-content>
+
+    <mat-grid-list cols="3" rowHeight="100px">
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Nombre&nbsp;</mat-label><br>
+                <input id="noNull" size="20" matInput placeholder="" *ngIf="data" [(ngModel)]="data.Nombre">
+                <input id="nullN" size="20" matInput *ngIf="data == null" noNull.matDialogClose [(ngModel)]="nombreN">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Apellido Paterno&nbsp;</mat-label><br>
+                <input id="paNull" matInput placeholder="" *ngIf="data" [(ngModel)]="data.ApellidoPaterno">
+                <input id="nullpa" matInput *ngIf="data == null" paNull.matDialogClose [(ngModel)]="apellidoPaterno">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Apellido Materno&nbsp;</mat-label><br>
+                <input id="maNull" matInput placeholder="" *ngIf="data" [(ngModel)]="data.ApellidoMaterno">
+                <input id="nullma" matInput *ngIf="data == null" maNull.matDialogClose [(ngModel)]="apellidoMaterno">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Rol</mat-label><br>
+                <mat-select [(value)]="selected">
+                    <mat-option value="ADMIN_ROLE">ADMIN_ROLE</mat-option>
+                    <mat-option value="USER_ROLE">USER_ROLE</mat-option>
+                    <mat-option value="APAPACHADOR_ROLE">APAPACHADOR_ROLE</mat-option>
+                    <mat-option value="TALENT_ROLE">TALENT_ROLE</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Status</mat-label><br>
+                <mat-select [(value)]="selectedSTA">
+                    <mat-option [value]="true">TRUE</mat-option>
+                    <mat-option [value]="false">FALSE</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Email: &nbsp;</mat-label><br>
+                <input id="noNullE" matInput placeholder="" *ngIf="data" value="{{data.Email}}"
+                    [(ngModel)]="data.Email">
+                <input id="nullE" matInput *ngIf="data == null" noNullE.matDialogClose [(ngModel)]="nombreE">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Google: &nbsp;</mat-label><br>
+                <mat-label id="noNullG" *ngIf="data">{{data.Google}}</mat-label>
+                <input id="nullG" matInput *ngIf="data == null" noNullG.matDialogClose [(ngModel)]="nombreG">
+                <input matInput placeholder="" *ngIf="data" value="{{data.Google}}" hidden="true">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Password &nbsp;</mat-label><br>
+                <input id="noNullP" matInput placeholder="" *ngIf="data == null" [(ngModel)]="nombreP">
+                <input matInput placeholder="" *ngIf="data" value="{{data.Password}}" hidden="true">
+            </mat-form-field>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</div>
+
+<mat-grid-list cols="1" rowHeight="120px">
+    <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+            <label>ImgPrincipal &nbsp;</label><br><br>
+            <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+            <button class="btnSave" mat-raised-button color="primary"
+                (click)="fileInput.click()">{{txtFile}}</button>&nbsp;&nbsp;
+            <button class="btnSave" *ngIf="btnUpload" mat-raised-button color="primary"
+                (click)="onUpload()">Upload</button><label>{{txtAccion}}</label>
+
+            <mat-label id="noNullI" *ngIf="data">{{data.Imagen}}</mat-label>
+            <input id="noNullI" matInput placeholder="" *ngIf="data" value="{{data.Img}}" [(ngModel)]="data.Img"
+                disabled="true">
+            <input id="nullI" matInput *ngIf="data == null" noNullI.matDialogClose [(ngModel)]="nombreI"
+                disabled="true">
+        </mat-form-field>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<h2></h2>
+
+<mat-grid-list cols="1" rowHeight="75px">
+    <mat-grid-tile>
+        <mat-dialog-actions>
+            <div align="start">
+                <button class="btnCancel" mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div align="end">
+                <button class="btnSave" id="btnActu" *ngIf="tempImg" mat-raised-button color="primary"
+                    (click)="save()">{{btnTexto}}</button><button class="btnSave" *ngIf="tempImgCreate" mat-raised-button
+                    color="primary" (click)="create()" btnActu.matDialogClose>{{btnTexto}}</button>
+            </div>
+        </mat-dialog-actions>
+    </mat-grid-tile>
+</mat-grid-list>

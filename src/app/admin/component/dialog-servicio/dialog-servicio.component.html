@@ -1,0 +1,75 @@
+<h2>{{texto}}</h2>
+
+<div mat-dialog-content>
+
+    <mat-grid-list cols="2" rowHeight="100px">
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Servicio&nbsp;</mat-label><br>
+                <input id="noNull" matInput placeholder="" *ngIf="data" [(ngModel)]="data.NombreServicio" required>
+                <input id="nullN" matInput *ngIf="data == null" noNull.matDialogClose [(ngModel)]="nombreSE" required>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Icono Ionic&nbsp;</mat-label><br>
+                <input id="noNullii" matInput placeholder="" *ngIf="data" [(ngModel)]="data.IconoIonic" required>
+                <input id="nullii" matInput *ngIf="data == null" noNullii.matDialogClose [(ngModel)]="nombreII"
+                    required>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Icono Material&nbsp;</mat-label><br>
+                <input id="noNullim" matInput placeholder="" *ngIf="data" [(ngModel)]="data.IconoMaterial" required>
+                <input id="nullNim" matInput *ngIf="data == null" noNullim.matDialogClose [(ngModel)]="nombreIM"
+                    required>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Status&nbsp;</mat-label><br>
+                <mat-select [(value)]="selected" required>
+                    <mat-option [value]="true">TRUE</mat-option>
+                    <mat-option [value]="false">FALSE</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+
+
+    </mat-grid-list>
+</div>
+
+<mat-grid-list cols="1" rowHeight="300px">
+    <mat-label>Descripción</mat-label>
+    <mat-grid-tile>
+        <angular-editor [placeholder]="'Descripción...'" *ngIf="data" [config]="editorConfig"
+            [(ngModel)]="data.Descripcion">
+        </angular-editor>
+        <angular-editor [placeholder]="'Descripción...'" *ngIf="data == null" [config]="editorConfig"
+            [(ngModel)]="nombreD">
+        </angular-editor>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<h2></h2>
+
+<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
+        <mat-dialog-actions>
+            <div align="start">
+                <button class="btnCancel" mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div align="end">
+                <button class="btnSave" id="btnActu" *ngIf="data" mat-raised-button color="primary"
+                    (click)="save()">{{btnTexto}}</button><button class="btnSave" *ngIf="data == null" mat-raised-button
+                    color="primary" (click)="create()" btnActu.matDialogClose>{{btnTexto}}</button>
+            </div>
+        </mat-dialog-actions>
+    </mat-grid-tile>
+</mat-grid-list>

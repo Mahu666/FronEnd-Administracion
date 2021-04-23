@@ -1,0 +1,66 @@
+<mat-form-field>
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Abc" #input>
+</mat-form-field>&nbsp;&nbsp;&nbsp;
+
+<button class="btnAdd" mat-raised-button color="primary" (click)="openDialogCreate()">Agregar</button>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <tr>
+            <!-- Sitios Column -->
+            <ng-container matColumnDef="nombreSitio">
+                <th mat-header-cell *matHeaderCellDef> Sitio </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreSitio}} </td>
+            </ng-container>
+
+            <!-- ubicacion Column -->
+            <ng-container matColumnDef="ubicacion">
+                <th mat-header-cell *matHeaderCellDef> Ubicación </th>
+                <td mat-cell *matCellDef="let element"> {{element.ubicacion}} </td>
+            </ng-container>
+
+            <!-- licencia Column -->
+            <ng-container matColumnDef="licencia">
+                <th mat-header-cell *matHeaderCellDef> Licencia </th>
+                <td mat-cell *matCellDef="let element"> {{element.licencia}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">{{element.acciones}}
+                    <button class="btnUpdate" mat-mini-fab color="warn" aria-label="Actualizar Sitio" (click)="openDialog(element.nombreSitio, element.imgPrincipal, element.video, 
+                    element.descripcion, element.banner, element.nombreContacto1, element.telContacto1, element.correoContacto1, element.nombreContacto2, 
+                    element.telContacto2, element.correoContacto2, element.servicios, element.horarioOpen, element.horarioClose, element.ubicacion, element.licencia, 
+                    element.categoria, element.usuario, element.municipio, element.status, element._id)">
+                        <mat-icon>update</mat-icon>
+                    </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btnDelete" mat-mini-fab color="primary" aria-label="Eliminar Sitio"
+                        (click)="BorrarId(element._id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+        </tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <div align="end">
+        <button class="btnBack" id="btnPrev" mat-raised-button color="primary" (click)="dec()">
+            < </button>
+                <label>&nbsp; {{mostrarPaginaPrev}} &nbsp; - &nbsp; {{est}} &nbsp; de &nbsp;
+                    {{totalSitios}}&nbsp;&nbsp;</label>
+                <button class="btnNext" id="btnNext" mat-raised-button color="primary" (click)="inc()"> > </button>
+    </div>
+
+</div>

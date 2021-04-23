@@ -1,0 +1,8 @@
+<p>dialog-mapa works!</p>
+
+<button (click)="obtenerUbicacion()">Obtener ubicación</button><label>{{txtTexto}}</label>
+<button *ngIf="obtenida" (click)="guardarUbicacion()">Guardar Ubicación</button>
+
+<div id="mapa" mapa>
+
+</div>

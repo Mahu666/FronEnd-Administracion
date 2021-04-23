@@ -1,0 +1,43 @@
+<h2>{{texto}}</h2>
+
+<div mat-dialog-content>
+    <mat-grid-list cols="2" rowHeight="70px">
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Nombre País&nbsp;</mat-label><br>
+                <input id="noNull" matInput placeholder="" *ngIf="data" [(ngModel)]="data.NombrePais" required>
+                <input id="nullN" matInput *ngIf="data == null" noNull.matDialogClose [(ngModel)]="nombreP" required>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <mat-label>Status&nbsp;</mat-label><br>
+                <mat-select [(value)]="selected" required>
+                    <mat-option [value]="true">TRUE</mat-option>
+                    <mat-option [value]="false">FALSE</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</div>
+<br>
+<h2></h2>
+
+<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
+        <mat-dialog-actions>
+            <div align="start">
+                <button class="btnCancel" mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div align="end">
+                <button class="btnSave" id="btnActu" *ngIf="data" mat-raised-button color="primary"
+                    (click)="save()">{{btnTexto}}</button><button class="btnSave" *ngIf="data == null" mat-raised-button
+                    color="primary" (click)="create()" btnActu.matDialogClose>{{btnTexto}}</button>
+            </div>
+        </mat-dialog-actions>
+    </mat-grid-tile>
+</mat-grid-list>
