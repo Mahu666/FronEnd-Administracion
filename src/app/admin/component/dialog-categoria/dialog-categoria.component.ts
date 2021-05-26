@@ -82,8 +82,8 @@ export class DialogCategoriaComponent implements OnInit {
     true, false
   ];
 
-  selectedTipos: string[] = [
-    'talento', 'apapachador'
+  tipos: string[] = [
+    'Talento', 'Apapachador'
   ];
 
   //#endregion
@@ -91,7 +91,7 @@ export class DialogCategoriaComponent implements OnInit {
   //#region VALIDACIÓN INICIAL
 
   selected = (this.data == null) ? this.StatusSELE : this.data.Status;
-  tipos = (this.data == null) ? this.selectedTipos : this.data.Tipo;
+  selectedTipos = (this.data == null) ? this.tipos : this.data.Tipo;
 
   //#endregion
 
@@ -107,6 +107,8 @@ export class DialogCategoriaComponent implements OnInit {
       console.log(this.data.Tipo);
       this.texto = 'Actualizar Categoría';
       this.btnTexto = 'Actualizar';
+      this.opcionSeleccionado = this.data.Tipo;
+      //this.selectedTipos
     }
   }
 

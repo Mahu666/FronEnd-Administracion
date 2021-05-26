@@ -30,25 +30,14 @@
         </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         <button class="btnDelete" mat-mini-fab color="primary" aria-label="Eliminar País"
-          (click)="BorrarId(element._id)" >
+          (click)="BorrarId(element._id)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
-  <!-- FALTA HACER EL PAGINADO DINÁMICO-->
-  <!-- AGREGAR BOTONES DE < Y > USANDO MÉTODOS DE inc() y dec()-->
-  <!-- AGREGAR BOTONES DE REGRESAR A LA PRIMER PÁGINA Y ULTIMA <| |>, Buscar metodos para enviar a primer y ultima página.-->
-  <!-- CONTAR REGISTROS DE LA CONSULTA PARA LA TABLA. SE USARÁ DATO DE .length PARA VALIDAR Y NO SE HAGAN PAGINAS INFINITAS.-->
-  <!-- VALIDACIÓN DE URL DONDE PIDA "desde/#" NO SE USARÁ  ?) (page)="pageEvent = $event"-->
-
-  <!-- No se puede hacer dinamico por obtener solamente 5 datos de la consulta. se puede simular y hacer siempre consulta de 5 en 5. (Consume menos recursos)-->
-  <!-- En dinámico y el simulado no se puede modificar para que aparezcan de 5, 10, 25, 100 etc, el datasource siempre será de 5, cuando se modifica y se quiere que muestre
-  mas de 5 datos, no se podrá. -->
 
   <div align="end">
     <button class="btnBack" id="btnPrev" mat-raised-button color="primary" (click)="dec()">
@@ -57,5 +46,4 @@
           {{totalPaises}}&nbsp;&nbsp;</label>
         <button class="btnNext" id="btnNext" mat-raised-button color="primary" (click)="inc()"> > </button>
   </div>
-
 </div>

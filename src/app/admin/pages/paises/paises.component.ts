@@ -23,7 +23,7 @@ export class PaisesComponent implements AfterViewInit {
   public paises: Pais[] = [];
   public paisById: Pais[] = [];
   public byId: any;
-  public paisModal = {};// Usuario[] = [];
+  public paisModal = {};
   public pagina: any = 0;
   public totalPais: any = 0;
 

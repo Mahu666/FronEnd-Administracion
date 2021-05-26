@@ -12,6 +12,7 @@ import { TalentosService } from '../../services/talentos.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Taller } from 'src/app/models/taller.model';
 import { TTallerDialogMapaComponent } from './dialog-mapa/dialog-mapa.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dialog-taller',
@@ -324,19 +325,76 @@ export class ATDialogTallerComponent implements OnInit {
     this.prec = this.precio;
     this.ubic = this.ubicacion;
 
-    if (this.selectedSit !== null && this.selectedTal.length === 0) {
-      this.talleresServices.crearTaller(this.nombreTall, this.imgs, this.desc, this.prec, this.ubic,
-        this.selectedSTA, this.selectedSit, undefined).subscribe(resp => {
-          this.dialogRef.close("Se ha creado correctamente");
-          window.location.reload();
-        });
+    if (this.nombreTall === undefined || this.nombreTall === '' || this.nombreTall === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El nombre del Taller no debe estar vacío!',
+      })
+      return;
     }
+
+    if (this.prec === undefined || this.prec === '' || this.nombreTall === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El precio no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (this.selectedSTA === this.StatusSELE) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El status no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.imgs).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'La imagen principal no debe estar vacía!',
+      })
+      return;
+    }
+
+    if (this.desc === undefined || this.desc === '' || this.desc === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'La descripción no debe estar vacía!',
+      })
+      return;
+    }
+
     else {
-      this.talleresServices.crearTaller(this.nombreTall, this.imgs, this.desc, this.prec, this.ubic,
-        this.selectedSTA, undefined, this.selectedTal).subscribe(resp => {
-          this.dialogRef.close("Se ha creado correctamente");
-          window.location.reload();
-        });
+
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Se ha creado exitosamente.',
+        showConfirmButton: false,
+        timer: 1000
+      })
+      if (this.selectedSit !== null && this.selectedTal.length === 0) {
+        this.talleresServices.crearTaller(this.nombreTall, this.imgs, this.desc, this.prec, this.ubic,
+          this.selectedSTA, this.selectedSit, undefined).subscribe(resp => {
+            setTimeout(function () {
+              window.location.reload()
+            }, 1000)
+          });
+      }
+      else {
+        this.talleresServices.crearTaller(this.nombreTall, this.imgPrincipal, this.desc, this.prec, this.ubic,
+          this.selectedSTA, undefined, this.selectedTal).subscribe(resp => {
+            setTimeout(function () {
+              window.location.reload()
+            }, 1000)
+          });
+      }
     }
 
   }
@@ -351,23 +409,94 @@ export class ATDialogTallerComponent implements OnInit {
     this.desc = this.data.Descripcion;
     this.prec = this.data.Precio;
     this.ubic = this.data.Ubicacion;
-    //this.sit = this.data.Sitio;
-    console.log(this.selectedSit);
-    if (this.selectedSit !== null && this.selectedTal === undefined) {
-      //this.selectedSit = this.data.Sitio;
-      this.talleresServices.actualizarTaller(this.nombreTall, this.imgPrincipal, this.desc, this.prec, this.ubic,
-        this.selectedSTA, this.selectedSit, undefined, this.tallerId).subscribe(resp => {
-          this.dialogRef.close("Se ha actualizado correctamente");
-          window.location.reload();
-        });
-    } else {
-      this.talleresServices.actualizarTaller(this.nombreTall, this.imgPrincipal, this.desc, this.prec, this.ubic,
-        this.selectedSTA, undefined, this.selectedTal, this.tallerId).subscribe(resp => {
-          this.dialogRef.close("Se ha actualizado correctamente");
-          window.location.reload();
-        });
+    
+    if (this.nombreTall === undefined || this.nombreTall === '' || this.nombreTall === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El nombre del Taller no debe estar vacío!',
+      })
+      return;
     }
 
+    if (this.prec === undefined || this.prec === '' || this.nombreTall === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El precio no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (this.selectedSTA === this.StatusSELE) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El status no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.imgPrincipal).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'La imagen principal no debe estar vacía!',
+      })
+      return;
+    }
+
+    if (this.desc === undefined || this.desc === '' || this.desc === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'La descripción no debe estar vacía!',
+      })
+      return;
+    }
+    else {
+
+      Swal.fire({
+        title: 'Seguro que desea actualizar?',
+        //text: 'Se actualizará el registro.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, actualizalo!',
+        cancelButtonText: 'No!',
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Actualizado',
+            'Tu registro se ha actualizado.',
+            'success',
+          )
+          if (result.isConfirmed) {
+            if (this.selectedSit !== null && this.selectedTal === undefined) {
+              //this.selectedSit = this.data.Sitio;
+              this.talleresServices.actualizarTaller(this.nombreTall, this.imgPrincipal, this.desc, this.prec, this.ubic,
+                this.selectedSTA, this.selectedSit, undefined, this.tallerId).subscribe(resp => {
+                  setTimeout(function () {
+                    window.location.reload()
+                  }, 1000)
+                });
+            } else {
+              this.talleresServices.actualizarTaller(this.nombreTall, this.imgPrincipal, this.desc, this.prec, this.ubic,
+                this.selectedSTA, undefined, this.selectedTal, this.tallerId).subscribe(resp => {
+                  setTimeout(function () {
+                    window.location.reload()
+                  }, 1000)
+                });
+            }
+          }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Cancelado',
+            'Tu registro está seguro',
+            'error'
+          )
+        }
+      })
+    }
   }
 
   validarSIT() {

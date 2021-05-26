@@ -13,6 +13,7 @@ import { Talent } from 'src/app/models/talent.model';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { SitiosService } from '../../services/sitios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-talleres',
@@ -158,12 +159,39 @@ export class TalleresComponent implements OnInit {
   }
 
   BorrarId(_id: any) {
-    if (confirm('Seguro que desea eliminar?')) {
-      this.talleresService.borrarTaller(_id).subscribe(resp => {
-        this.dataSource = new MatTableDataSource<Taller>(this.talleres);
-        window.location.reload();
-      })
-    }
+    Swal.fire({
+      title: 'Seguro que desea eliminar?',
+      text: 'Se eliminará el registro.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borralo!',
+      cancelButtonText: 'No!',
+    }).then((result) => {
+
+      if (result.value) {
+        Swal.fire(
+          'Borrado',
+          'Tu registro se ha eliminado.',
+          'success',
+        )
+
+        if (result.isConfirmed) {
+          this.talleresService.borrarTaller(_id).subscribe(resp => {
+            this.dataSource = new MatTableDataSource<Taller>(this.talleres);
+          })
+          setTimeout(function () {
+            window.location.reload()
+          }, 1000)
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelado',
+          'Tu registro está seguro',
+          'error'
+        )
+      }
+    })
   }
 
   obtenerSitio() {

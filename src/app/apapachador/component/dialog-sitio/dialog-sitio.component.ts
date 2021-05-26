@@ -24,6 +24,7 @@ import { ADialogHorariosComponent } from './dialog-horarios/dialog-horarios.comp
 import { ICreateOrderRequest, ICreateSubscriptionRequest } from "ngx-paypal";
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Sitio } from 'src/app/models/sitio.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dialog-sitio',
@@ -608,13 +609,95 @@ export class ADialogSitioComponent implements OnInit {
     this.ubi = this.ubicacion;
     this.lice = this.licencia;
 
-    //console.log();
+    if (this.nombreSit === undefined || this.nombreSit === '' || this.nombreSit === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El nombre del Sitio no debe estar vacío!',
+      })
+      return;
+    }
 
-    this.sitiosServices.crearSitio(this.nombreSit, this.imgs, this.vid, this.desc, this.bann, this.nombreCont1, this.telCont1, this.correoCont1,
-      this.nombreCont2, this.telCont2, this.correoCont2, this.serv, this.horOpen, this.horClose, this.ubi, this.lice, this.selectedSTA).subscribe(resp => {
-        this.dialogRef.close("Se ha creado correctamente");
-        window.location.reload();
-      });
+    if (Object.entries(this.selectedCat).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'La Categoría no debe estar vacía!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.selectedUsu).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El Usuario no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.selectedMun).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El Municipio no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (this.selectedSTA === this.StatusSELE) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El status no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (this.nombreCont1 === undefined || this.nombreCont1 === '' || this.nombreCont1 === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El nombre del Contacto 1 no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (this.telCont1 === undefined || this.telCont1 === '' || this.telCont1 === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El Teléfono del Contacto 1 no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.imgs).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'La imagen principal no debe estar vacía!',
+      })
+      return;
+    }
+
+    else {
+
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Se ha creado exitosamente.',
+        showConfirmButton: false,
+        timer: 1000
+      })
+      this.sitiosServices.crearSitio(this.nombreSit, this.imgs, this.vid, this.desc, this.bann, this.nombreCont1, this.telCont1, this.correoCont1,
+        this.nombreCont2, this.telCont2, this.correoCont2, this.serv, this.horOpen, this.horClose, this.ubi, this.lice, this.selectedSTA).subscribe(resp => {
+          setTimeout(function () {
+            window.location.reload()
+          }, 1100)
+        });
+
+    }  
 
   }
 
@@ -645,14 +728,114 @@ export class ADialogSitioComponent implements OnInit {
     this.ins = this.data.Instagram;
     this.sWeb = this.data.SitioWeb;
 
-    console.log(this.fb);
-    this.sitiosServices.actualizarSitio(this.nombreSit, this.sitImg, this.vid, this.desc, this.bann, this.nombreCont1, this.telCont1, this.correoCont1,
-      this.nombreCont2, this.telCont2, this.correoCont2, this.serv, this.horOpen, this.horClose, this.ubi, this.lice, this.fb, this.ins, this.sWeb, this.selectedCat,
-      this.data.Usuario, this.selectedMun, this.selectedSTA, this.sitioId).subscribe(resp => {
-        this.dialogRef.close("Se ha actualizado correctamente");
-        window.location.reload();
-      });
 
+    if (this.nombreSit === undefined || this.nombreSit === '' || this.nombreSit === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El nombre del Sitio no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.selectedCat).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'La Categoría no debe estar vacía!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.selectedUsu).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El Usuario no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.selectedMun).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El Municipio no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (this.selectedSTA === this.StatusSELE) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El status no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (this.nombreCont1 === undefined || this.nombreCont1 === '' || this.nombreCont1 === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El nombre del Contacto 1 no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (this.telCont1 === undefined || this.telCont1 === '' || this.telCont1 === null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El Teléfono del Contacto 1 no debe estar vacío!',
+      })
+      return;
+    }
+
+    if (Object.entries(this.imgPrincipal).length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'La imagen principal no debe estar vacía!',
+      })
+      return;
+    }
+
+    else {
+
+      Swal.fire({
+        title: 'Seguro que desea actualizar?',
+        //text: 'Se actualizará el registro.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, actualizalo!',
+        cancelButtonText: 'No!',
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Actualizado',
+            'Tu registro se ha actualizado.',
+            'success',
+          )
+          if (result.isConfirmed) {
+            this.sitiosServices.actualizarSitio(this.nombreSit, this.sitImg, this.vid, this.desc, this.bann, this.nombreCont1, this.telCont1, this.correoCont1,
+              this.nombreCont2, this.telCont2, this.correoCont2, this.serv, this.horOpen, this.horClose, this.ubi, this.lice, this.fb, this.ins, this.sWeb, this.selectedCat,
+              this.data.Usuario, this.selectedMun, this.selectedSTA, this.sitioId).subscribe(resp => {
+              });
+            setTimeout(function () {
+              window.location.reload()
+            }, 1000)
+          }
+
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Cancelado',
+            'Tu registro está seguro',
+            'error'
+          )
+        }
+      })
+    }
   }
 
   //#endregion

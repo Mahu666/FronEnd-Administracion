@@ -14,6 +14,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { Municipio } from 'src/app/models/municipio.model';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -179,12 +180,40 @@ export class SitiosComponent implements AfterViewInit {
   }
 
   BorrarId(_id: any) {
-    if (confirm('Seguro que desea eliminar?')) {
-      this.sitiosService.borrarSitio(_id).subscribe(resp => {
-        this.dataSource = new MatTableDataSource<Sitio>(this.sitios);
-        window.location.reload();
-      })
-    }
+    Swal.fire({
+      title: 'Seguro que desea eliminar?',
+      text: 'Se eliminará el registro.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borralo!',
+      cancelButtonText: 'No!',
+    }).then((result) => {
+
+      if (result.value) {
+        Swal.fire(
+          'Borrado',
+          'Tu registro se ha eliminado.',
+          'success',
+        )
+
+        if (result.isConfirmed) {
+          this.sitiosService.borrarSitio(_id).subscribe(resp => {
+            this.dataSource = new MatTableDataSource<Sitio>(this.sitios);
+          })
+          setTimeout(function () {
+            window.location.reload()
+          }, 1000)
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelado',
+          'Tu registro está seguro',
+          'error'
+        )
+      }
+    })
+
   }
 
   //#endregion

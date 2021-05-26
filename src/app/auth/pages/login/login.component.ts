@@ -16,8 +16,8 @@ export class LoginComponent {
 
   //admin@admin.com
   public loginForm = this.fb.group({
-    email: [localStorage.getItem('email') || 'admin@admin.com', [Validators.required, Validators.email]],
-    password: ['123456', Validators.required],
+    email: [localStorage.getItem('email') || '', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
 
   constructor(private router: Router,
